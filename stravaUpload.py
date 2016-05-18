@@ -39,13 +39,13 @@ class Strava():
         jresp = self.get_web_data(url, data)
         self.athlete_token = jresp
         if self.athlete_token["token"]:
-            print "STRAVA - Logged in."
+            print("STRAVA - Logged in.")
             self.parseAthleteToken()
             athlete = jresp["athlete"]
-            print "Welcome back " + self.name
+            print("Welcome back " + self.name)
         else:
-            print "STRAVA - Failed login"
-            print resp
+            print("STRAVA - Failed login")
+            print(resp)
             sys.exit()
   
     def upload(self, filename):
@@ -66,14 +66,14 @@ class Strava():
         url += str(self.id)
         data = {'token': self.token}
         jresp = self.get_web_data(url, data)
-        print jresp
+        print(jresp)
         
 
 def UploadToStrava(filename, email, passwd):            
     s = Strava(email, passwd)
     s.login()
     uploadid = s.upload(filename)
-    print "Upload id: " + str(uploadid)
+    print("Upload id: " + str(uploadid))
 
 def main():
     if len(sys.argv) != 2:

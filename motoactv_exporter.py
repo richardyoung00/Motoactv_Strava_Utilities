@@ -13,20 +13,20 @@ def move(src,dst):
 
 def main():
 
-    moto_email = ''
-    moto_pass = ''
+    moto_email = 'richard.young00@gmail.com'
+    moto_pass = '0706402y'
 
     strava_email = ''
     strava_pass = ''
 
     filenamecsv = DownloadFromPortal(moto_email, moto_pass)
     if(filenamecsv == 'null'):
-        print 'Done'
+        print("Done")
         return
 
-    print 'Downloaded: ' + filenamecsv
+    print('Downloaded: ' + filenamecsv)
 
-    print "Converting ..."
+    print("Converting ...")
 
     # better converter
     tcxfile = convertTCX(filenamecsv)
@@ -34,13 +34,13 @@ def main():
     # use tidy to clean up non-indented xml file
     os.system("tidy -i -q -xml -f tidy_errs.txt -m " + tcxfile)
 
-    print 'uploading ' + tcxfile + '...'
+    print('uploading ' + tcxfile + '...')
 
     # upload TCX to Strava
     UploadToStrava(tcxfile, strava_email, strava_pass)
     
     #move files for permanent storage
-    print 'moving files ...'
+    print('moving files ...')
     move(filenamecsv, './MotoBackups/'+filenamecsv)
     move(tcxfile, './TCXBackups/'+tcxfile)
 
